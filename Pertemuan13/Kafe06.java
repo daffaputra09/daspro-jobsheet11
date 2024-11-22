@@ -4,18 +4,18 @@ import java.util.Scanner;
 
 public class Kafe06 {
     public static void main(String[] args) {
-        Menu("Andi", true, "DISKON50");
+        String kodePromo = "DISKON50";
+        Menu("Andi", true, kodePromo);
+        Scanner sc = new Scanner(System.in);
 
-         Scanner sc = new Scanner(System.in);
-        
         System.out.print("\nMasukkan nomor menu yang ingin Anda pesan: ");
         int pilihanMenu = sc.nextInt();
-        System. out.print ("Masukkan jumlah item yang ingin dipesan: ");
+        System.out.print("Masukkan jumlah item yang ingin dipesan: ");
         int banyakItem = sc.nextInt();
-        
-        int totalHarga = hitungTotalHarga(pilihanMenu, banyakItem);
-        
-        System. out.println("Total harga untuk pesanan Anda: Rp" + totalHarga); 
+
+        int totalHarga = hitungTotalHarga(pilihanMenu, banyakItem, kodePromo);
+
+        System.out.println("Total harga untuk pesanan Anda: Rp" + totalHarga);
     }
 
     public static void Menu(String namaPelanggan, boolean isMember, String kodePromo) {
@@ -44,10 +44,18 @@ public class Kafe06 {
         System.out.println("Silakan pilih menu yang Anda inginkan.");
     }
 
-
-    public static int hitungTotalHarga(int pilihanMenu, int banyakItem) {
+    public static int hitungTotalHarga(int pilihanMenu, int banyakItem, String kodePromo) {
         int[] hargaItems = {15000, 20000, 22000, 12000, 10000, 18000};
         int hargaTotal = hargaItems[pilihanMenu - 1] * banyakItem;
+
+        if ("DISKON50".equals(kodePromo)) {
+            hargaTotal *= 0.5;
+        } else if ("DISKON30".equals(kodePromo)) {
+            hargaTotal *= 0.7;
+        } else {
+            System.out.println("Kode promo invalid. Tidak ada pengurangan total harga.");
+        }
+
         return hargaTotal;
     }
 }
