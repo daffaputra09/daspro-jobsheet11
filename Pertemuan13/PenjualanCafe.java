@@ -3,17 +3,14 @@ package Pertemuan13;
 import java.util.Scanner;
 
 public class PenjualanCafe {
-    private static int JUMLAH_HARI = 7;
-    private static int MENU = 5;
-    private static String[] jenisMenu = {"Kopi", "Teh", "Es Degan", "Roti Bakar", "Gorengan"};
-    private static int[][] dataPenjualan = {
-        {20, 20, 25, 20, 10, 60, 10}, 
-        {30, 80, 40, 10, 15, 20, 25}, 
-        {5, 9, 20, 25, 10, 5, 45},    
-        {50, 8, 17, 18, 10, 30, 6},   
-        {15, 10, 16, 15, 10, 10, 55}  
-    };
+    private static int JUMLAH_HARI;
+    private static int MENU;
+    private static String[] jenisMenu;
+    private static int[][] dataPenjualan;
+    
+    
     public static void main(String[] args) {
+        menentukanData();
         Scanner scanner = new Scanner(System.in);
         int pilihan;
         
@@ -30,24 +27,44 @@ public class PenjualanCafe {
             
             switch (pilihan) {
                 case 1:
-                    inputDataPenjualan();
-                    break;
+                inputDataPenjualan();
+                break;
                 case 2:
-                    tampilkanSeluruhPenjualan();
-                    break;
+                tampilkanSeluruhPenjualan();
+                break;
                 case 3:
-                    tampilkanPenjualanTertinggi();
-                    break;
+                tampilkanPenjualanTertinggi();
+                break;
                 case 4:
                 tampilkanRataRataPenjualan();
-                    break;
+                break;
                 case 0:
-                    System.out.println("Terima kasih telah menggunakan program ini!");
+                System.out.println("Terima kasih telah menggunakan program ini!");
                     break;
                 default:
-                    System.out.println("Pilihan tidak valid!");
+                System.out.println("Pilihan tidak valid!");
             }
         } while (pilihan != 0);
+    }
+    
+    public static void menentukanData() {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Masukkan jumlah hari: ");
+        JUMLAH_HARI = scanner.nextInt();
+        
+        System.out.print("Masukkan jumlah menu: ");
+        MENU = scanner.nextInt();
+        scanner.nextLine(); 
+        
+        jenisMenu = new String[MENU];
+        dataPenjualan = new int[MENU][JUMLAH_HARI];
+        
+        System.out.println("\nMasukkan nama-nama menu:");
+        for (int i = 0; i < MENU; i++) {
+            System.out.print("Menu ke-" + (i + 1) + ": ");
+            jenisMenu[i] = scanner.nextLine();
+        }
     }
     
     public static void inputDataPenjualan() {
