@@ -8,14 +8,24 @@ public class Kafe06 {
         Menu("Andi", true, kodePromo);
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("\nMasukkan nomor menu yang ingin Anda pesan: ");
-        int pilihanMenu = sc.nextInt();
-        System.out.print("Masukkan jumlah item yang ingin dipesan: ");
-        int banyakItem = sc.nextInt();
+        int totalKeseluruhan = 0;
 
-        int totalHarga = hitungTotalHarga(pilihanMenu, banyakItem, kodePromo);
+        while (true) {
+            System.out.print("\nMasukkan nomor menu yang ingin Anda pesan (0 untuk selesai): ");
+            int pilihanMenu = sc.nextInt();
+            
+            if (pilihanMenu == 0) break; 
 
-        System.out.println("Total harga untuk pesanan Anda: Rp" + totalHarga);
+            System.out.print("Masukkan jumlah item yang ingin dipesan: ");
+            int banyakItem = sc.nextInt();
+
+            int totalHarga = hitungTotalHarga(pilihanMenu, banyakItem, kodePromo);
+            totalKeseluruhan += totalHarga;
+
+            System.out.println("Total harga sementara: Rp" + totalKeseluruhan);
+        }
+
+        System.out.println("\nTotal keseluruhan pesanan Anda: Rp" + totalKeseluruhan);
     }
 
     public static void Menu(String namaPelanggan, boolean isMember, String kodePromo) {
